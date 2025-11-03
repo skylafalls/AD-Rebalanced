@@ -13,7 +13,7 @@ export const glyphSacrifice = {
       const nextGalaxyText = ` (next at ${format(nextDistantGalaxy, 2, 2)})`;
       return `Distant and Further Galaxy scaling starts ${formatInt(amount)} later${nextGalaxyText}`;
     },
-    cap: () => 1e129
+    cap: () => GlyphSacrificeHandler.maxSacrificeForEffects
   },
   "infinity": {
     id: "infinity",

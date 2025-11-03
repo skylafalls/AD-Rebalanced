@@ -57,8 +57,8 @@ export default {
         this.dimMultiplier.copyFrom(this.infinityPower.pow(this.conversionRate).max(1));
       }
       this.powerPerSecond.copyFrom(InfinityDimension(1).productionPerSecond);
-      this.convSoftcapStart = InfinityDimensions.convSoftcapStart
-      this.convSoftcapEff = InfinityDimensions.convSoftcapEffect
+      this.convSoftcapStart = InfinityDimensions.convSoftcapStart;
+      this.convSoftcapEff = InfinityDimensions.convSoftcapEffect;
       this.incomeType = EternityChallenge(7).isRunning ? "Eighth Dimensions" : "Infinity Power";
       this.isEC8Running = EternityChallenge(8).isRunning;
       if (this.isEC8Running) {
@@ -158,7 +158,7 @@ export default {
       purchases each.
     </div>
     <div>You are getting {{ format(powerPerSecond, 2, 0) }} {{ incomeType }} per second.</div>
-    <div>Beyond {{ format(convSoftcapStart, 2, 0) }} Infinity Power, your conversion rate gets divided by /{{ format(convSoftcapEff, 4, 4) }}.</div>
+    <div v-if="infinityPower.gte(convSoftcapStart)">Beyond {{ format(convSoftcapStart, 2, 0) }} Infinity Power, your conversion rate gets divided by /{{ format(convSoftcapEff, 4, 4) }}.</div>
     <b
       v-if="isEC8Running"
       class="l-infinity-dim-tab__ec8-purchases"

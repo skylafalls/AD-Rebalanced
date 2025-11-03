@@ -2,7 +2,7 @@ import { IntervaledAutobuyerState } from "./autobuyer";
 
 export class DilationUpgradeAutobuyerState extends IntervaledAutobuyerState {
   get _upgradeName() {
-    return ["dtGain", "galaxyThreshold", "tachyonGain", "reduceAndIncrease"][this.id - 1];
+    return ["dtGain", "galaxyThreshold", "tachyonGain", "tachyonBaseExponent"][this.id - 1];
   }
 
   get data() {
@@ -10,7 +10,7 @@ export class DilationUpgradeAutobuyerState extends IntervaledAutobuyerState {
   }
 
   get name() {
-    return [`Dilated Time Multiplier`, `Tachyon Galaxy Threshold`, "Tachyon Particle Multiplier", "Dilation Reducer/Increaser"][this.id - 1];
+    return [`Dilated Time Multiplier`, `Tachyon Galaxy Threshold`, "Tachyon Particle Multiplier", "Tachyon Base Exponent"][this.id - 1];
   }
 
   get interval() {

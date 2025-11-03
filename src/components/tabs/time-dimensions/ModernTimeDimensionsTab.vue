@@ -19,6 +19,7 @@ export default {
       incomeType: "",
       areAutobuyersUnlocked: false,
       showLockedDimCostNote: true,
+      purchaseSoftcap: 0,
     };
   },
   computed: {
@@ -102,7 +103,7 @@ export default {
       </div>
       Any 8th Time Dimensions purchased above {{ format(1e8) }} will not further increase the multiplier.
       <br>
-      For all other tiers, any dimensions purchased above {{ format(1e8) }} will have it's purchase count reduced by /{{ format(2.3142791020597087, 3, 3) }}
+      For all other tiers, any dimensions purchased above {{ format(1e8) }} gradually get less and less effective over time.
     </div>
   </div>
 </template>

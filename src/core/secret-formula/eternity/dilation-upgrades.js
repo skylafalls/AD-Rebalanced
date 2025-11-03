@@ -84,33 +84,18 @@ export const dilationUpgrades = {
     formatCost: value => format(value, 2),
     purchaseCap: Number.MAX_VALUE
   }),
-  reduceAndIncrease: rebuyable({
+  tachyonBaseExponent: rebuyable({
     id: 4,
     initialCost: 1e10,
-    increment: 40,
-    description: () => {
-      let base = 0.5;
-      if (Currency.dilatedTime.value.gte(DC.E1000)) {
-        base /= ((Decimal.log10(Currency.dilatedTime.value) / 2000) / 50) + 1;
-      }
-      // eslint-disable-next-line no-negated-condition
-      const reduction = x => (x !== 0.5 ? `/${format(x.toDecimal().recip(), 2, 3)}` : formatPercents(x, 2, 2));
-      return `Reduce dilated time gain by ${reduction(base)} but increase the TP gain by ${formatX(4)}`;
-    },
+    increment: 150,
+    description: () => `Increase the Tachyon Particle formula exponent`,
     effect: bought => {
-      let lowBaser = 0.5;
-      if (Currency.dilatedTime.value.gte(DC.E1000)) {
-        lowBaser /= ((Decimal.log10(Currency.dilatedTime.value) / 2000) / 50) + 1;
-      }
-      return {
-        dt: Decimal.pow(lowBaser, bought),
-        tp: DC.D4.pow(bought)
-      };
+      let base = DC.D0_75.mul(bought);
+      if (base.gte(15)) base = base.div(15).pow(0.5).mul(15);
+      if (base.gte(100)) base = base.div(100).pow(0.25).mul(100);
+      return base;
     },
-    formatEffect: obj => {
-      if (obj.dt.lte(0.01)) return `/${format(obj.dt.recip(), 2, 2)} DT, ${formatX(obj.tp, 2, 2)} TP`;
-      return `${formatX(obj.dt, 2, 2)} DT, ${formatX(obj.tp, 2, 2)} TP`;
-    },
+    formatEffect: obj => `(log10(x)/400)^1.50 => (log10(x)/400)${formatPow(obj.add(1.5), 2, 2)}`,
     formatCost: value => format(value, 2),
     purchaseCap: Number.MAX_VALUE
   }),

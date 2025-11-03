@@ -48,9 +48,9 @@ export default {
   computed: {
     isDoomed: () => Pelle.isDoomed,
     replicantiChanceSetup() {
+      const powers = TimeStudy(213).effectValue * getAdjustedGlyphEffect("replicationpow") *
+        (getSecondaryGlyphEffect("replicationspeed") + 1);
       const display = value => {
-        const powers = TimeStudy(213).effectValue * getAdjustedGlyphEffect("replicationpow") *
-          (getSecondaryGlyphEffect("replicationspeed") + 1);
         let string = `Replicate chance: ${formatPercents(value)}`;
         if (TimeStudy(213).isBought) {
           string = `Replicanti chance: ${format(Decimal.pow(value, powers).times(100), 2, 2)}%`;
@@ -61,7 +61,7 @@ export default {
       return new ReplicantiUpgradeButtonSetup(
         ReplicantiUpgrade.chance,
         value => display(value),
-        cost => `+${formatPercents(this.nextPercent)} Costs: ${format(cost)} IP`
+        cost => `${powers > 1e6 ? "" : `+${formatPercents(this.nextPercent)} `}Costs: ${format(cost)} IP`
       );
     },
     replicantiIntervalSetup() {

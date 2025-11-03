@@ -1102,11 +1102,11 @@ export function checkAndLoadSave() {
     if (saveString !== "") {
       throw new Error(saveString);
     }
-  } catch ({ name, message }) {
+  } catch (theError) {
     // eslint-disable-next-line no-console
     console.error("Error while loading savefile, resetting save. Found error:");
     // eslint-disable-next-line no-console
-    console.error(name, message);
+    console.error(theError);
     GameStorage.hardReset();
     GameStorage.save();
     dev.forceCloudSave();

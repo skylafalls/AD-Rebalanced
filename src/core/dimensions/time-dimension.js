@@ -216,7 +216,7 @@ class TimeDimensionState extends DimensionState {
     let bought = tier === 8 ? Math.clampMax(dim.bought, 1e8) : dim.bought;
 
     if (bought > 1e8) {
-      bought = (bought * 0.4321 + 1e8);
+      bought = (bought * Math.sqrt(bought / 1e8) + 1e8);
     }
 
     if (tier === 8 && TimeStudy(227).canBeApplied) {
